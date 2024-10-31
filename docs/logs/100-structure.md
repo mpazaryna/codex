@@ -60,16 +60,19 @@ codex/
 ### Required Sections
 
 1. **Context**
+
    - Background information
    - Problem being addressed
    - Current situation
 
 2. **Discussion/Evolution**
+
    - Key considerations
    - Options explored
    - Decision process
 
 3. **Decisions**
+
    - Final choices made
    - Implementation details
    - Rationale
@@ -90,6 +93,7 @@ codex/
 ## Development Workflow
 
 1. **New Features/Changes**
+
    - Create appropriate log entry
    - Document initial approach
    - Capture LLM discussions
@@ -97,6 +101,7 @@ codex/
    - Update related logs
 
 2. **Code Changes**
+
    - Reference log numbers in commits
    - Update implementation details
    - Document challenges
@@ -126,12 +131,14 @@ codex/
 ## Key Decisions
 
 1. **Flat Documentation Structure**
+
    - All logs in single directory
    - Clear numbering system
    - LLM-friendly organization
    - Simple maintenance
 
 2. **Expanded Categories**
+
    - 99 files per category
    - Room for growth
    - Clear boundaries

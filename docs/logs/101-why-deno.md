@@ -9,6 +9,7 @@ When starting the Article Reader project, we needed to choose between Node.js an
 ### 1. Built-in TypeScript Support
 
 - **No Configuration Needed**
+
   - Zero setup for TypeScript
   - No tsconfig.json required
   - No build/compilation step
@@ -23,6 +24,7 @@ When starting the Article Reader project, we needed to choose between Node.js an
 ### 2. Modern Defaults
 
 - **Web Standards First**
+
   - Native fetch API
   - Web APIs by default
   - Modern JavaScript features
@@ -56,12 +58,14 @@ When starting the Article Reader project, we needed to choose between Node.js an
 ### 4. Project Specific Benefits
 
 1. **Article Fetching**
+
    - Built-in fetch API
    - Modern HTTP handling
    - Streaming capabilities
    - Better error handling
 
 2. **Content Processing**
+
    - TypeScript for type safety
    - Modern JS features
    - Better string handling
@@ -78,6 +82,7 @@ When starting the Article Reader project, we needed to choose between Node.js an
 ### Advantages over Node
 
 1. **Development Setup**
+
    ```shell
    # Node.js
    npm init
@@ -85,7 +90,7 @@ When starting the Article Reader project, we needed to choose between Node.js an
    npx tsc --init
    npm install ts-node
    # Configure tsconfig.json
-   
+
    # Deno
    # Just start coding
    ```
@@ -95,7 +100,7 @@ When starting the Article Reader project, we needed to choose between Node.js an
    ```shell
    # Node.js
    # All permissions by default
-   
+
    # Deno
    deno run --allow-net --allow-write article_reader.ts
    ```
@@ -104,8 +109,8 @@ When starting the Article Reader project, we needed to choose between Node.js an
 
    ```typescript
    // Node.js
-   import { JSDOM } from 'jsdom';  // Requires package.json, npm install
-   
+   import { JSDOM } from "jsdom"; // Requires package.json, npm install
+
    // Deno
    import { DOMParser } from "https://deno.land/x/deno_dom@v0.1.43/deno-dom-wasm.ts";
    ```
@@ -113,6 +118,7 @@ When starting the Article Reader project, we needed to choose between Node.js an
 ### Trade-offs
 
 1. **Ecosystem Size**
+
    - Smaller package ecosystem
    - But growing rapidly
    - Most needed packages available
@@ -152,12 +158,14 @@ When starting the Article Reader project, we needed to choose between Node.js an
 ### Why Deno Won
 
 1. **Development Velocity**
+
    - Zero config TypeScript
    - Immediate execution
    - Perfect for LLM-assisted dev
    - Reduced complexity
 
 2. **Project Fit**
+
    - Web-first approach
    - Built-in fetch
    - Security model

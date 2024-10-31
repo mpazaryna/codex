@@ -1,5 +1,7 @@
 # Codex
 
+To run prettier from mac: option-shift-f
+
 A modern article reading and archival tool built with Deno, showcasing the synthesis of AI-assisted development with systematic code refinement.
 
 ## Features
@@ -96,4 +98,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Martin Fowler's refactoring patterns
 - Deno community
 - AI assistance in initial prototype development
-
