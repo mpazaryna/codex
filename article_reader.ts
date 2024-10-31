@@ -1,5 +1,5 @@
 // article_reader.ts
-import { DOMParser, Element } from "https://deno.land/x/deno_dom@v0.1.43/deno-dom-wasm.ts";
+import { DOMParser, Element, Node } from "https://deno.land/x/deno_dom@v0.1.43/deno-dom-wasm.ts";
 
 // Configuration
 const config = {
@@ -183,7 +183,7 @@ async function ensureOutputDir(): Promise<void> {
   }
 }
 
-async function fetchArticle(url: string): Promise<FetchResult> {
+export async function fetchArticle(url: string): Promise<FetchResult> {
   try {
     console.log("Fetching article from:", url);
     
@@ -221,7 +221,11 @@ async function fetchArticle(url: string): Promise<FetchResult> {
     ];
     
     elementsToRemove.forEach(selector => {
-      doc.querySelectorAll(selector).forEach((el: Element) => el.remove());
+      doc.querySelectorAll(selector).forEach((node) => {
+        if (node instanceof Element) {
+          node._remove();
+        }
+      });
     });
     
     // Extract metadata
@@ -293,3 +297,6 @@ if (import.meta.main) {
     Deno.exit(1);
   }
 }
+
+// running the script:
+// deno run --allow-net --allow-write --allow-read --allow-env article_reader.ts <url>
