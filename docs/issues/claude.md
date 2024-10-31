@@ -2,7 +2,7 @@
 
 ## Core Improvements
 
-### Issue 1: Enhance Error Handling System
+### [Issue 1: Enhance Error Handling System](https://github.com/mpazaryna/codex/issues/1)
 
 **Labels**: enhancement, priority-high
 **Title**: Implement Comprehensive Error Handling System
@@ -84,7 +84,9 @@ Develop integration tests to verify system-wide functionality.
 ---
 
 ## Code Organization
+
 ### Issue 5: Refactor Code Structure
+
 **Labels**: refactor, architecture
 **Title**: Implement Modular Code Structure
 
@@ -92,6 +94,7 @@ Develop integration tests to verify system-wide functionality.
 Reorganize code into a more maintainable and scalable structure.
 
 **Tasks**:
+
 - [ ] Extract core functionalities into modules
 - [ ] Create clear interfaces between components
 - [ ] Implement dependency injection
@@ -101,7 +104,9 @@ Reorganize code into a more maintainable and scalable structure.
 ---
 
 ## Documentation
+
 ### Issue 6: Create Comprehensive Documentation
+
 **Labels**: documentation
 **Title**: Implement Project Documentation
 
@@ -109,6 +114,7 @@ Reorganize code into a more maintainable and scalable structure.
 Create complete project documentation covering all aspects of the system.
 
 **Tasks**:
+
 - [ ] Create API documentation
 - [ ] Write configuration guide
 - [ ] Add usage examples
@@ -119,12 +125,14 @@ Create complete project documentation covering all aspects of the system.
 ---
 
 ## Dependencies
+
 - Issue 3 should be completed before Issue 4
 - Issue 2 should be completed before Issue 5
 - Issue 1 should be completed before Issue 4
 - All issues should be completed before Issue 6 is finalized
 
 ## Labels to Create
+
 - enhancement
 - testing
 - documentation
@@ -135,6 +143,7 @@ Create complete project documentation covering all aspects of the system.
 - priority-low
 
 ## Project Board Columns
+
 1. To Do
 2. In Progress
 3. Review
