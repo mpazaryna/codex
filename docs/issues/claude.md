@@ -1,8 +1,6 @@
 # GitHub Issues
 
-## Core Improvements
-
-### [Issue 1: Enhance Error Handling System](https://github.com/mpazaryna/codex/issues/1)
+## [Enhance Error Handling System](https://github.com/mpazaryna/codex/issues/1)
 
 **Labels**: enhancement, priority-high
 **Title**: Implement Comprehensive Error Handling System
@@ -20,7 +18,7 @@ Improve the current error handling system to make it more robust and informative
 
 ---
 
-### Issue 2: Implement Configuration Management
+## [Implement Configuration Management](https://github.com/mpazaryna/codex/issues/2)
 
 **Labels**: enhancement, architecture
 **Title**: Create Robust Configuration Management System
@@ -38,9 +36,7 @@ Develop a flexible and maintainable configuration system.
 
 ---
 
-## Testing Implementation
-
-### Issue 3: Implement Unit Testing Suite
+## [Implement Unit Testing Suite](https://github.com/mpazaryna/codex/issues/3)
 
 **Labels**: testing, priority-high
 **Title**: Set Up Unit Testing Infrastructure and Initial Tests
@@ -56,6 +52,11 @@ Create comprehensive unit testing suite for core functionalities.
 - [ ] Add filename sanitization tests
 - [ ] Implement content cleanup tests
 - [ ] Create metadata extraction tests
+- [ ] Implement full article fetching tests
+- [ ] Create file output verification tests
+- [ ] Add error handling scenario tests
+- [ ] Implement configuration validation tests
+- [ ] Create mock services for testing
 
 **Acceptance Criteria**:
 
@@ -65,27 +66,7 @@ Create comprehensive unit testing suite for core functionalities.
 
 ---
 
-### Issue 4: Implement Integration Tests
-
-**Labels**: testing, priority-medium
-**Title**: Create Integration Test Suite
-
-**Description**:
-Develop integration tests to verify system-wide functionality.
-
-**Tasks**:
-
-- [ ] Implement full article fetching tests
-- [ ] Create file output verification tests
-- [ ] Add error handling scenario tests
-- [ ] Implement configuration validation tests
-- [ ] Create mock services for testing
-
----
-
-## Code Organization
-
-### Issue 5: Refactor Code Structure
+## Issue Refactor Code Structure
 
 **Labels**: refactor, architecture
 **Title**: Implement Modular Code Structure
@@ -103,9 +84,7 @@ Reorganize code into a more maintainable and scalable structure.
 
 ---
 
-## Documentation
-
-### Issue 6: Create Comprehensive Documentation
+## Create Comprehensive Documentation
 
 **Labels**: documentation
 **Title**: Implement Project Documentation
@@ -123,13 +102,6 @@ Create complete project documentation covering all aspects of the system.
 - [ ] Add contribution guidelines
 
 ---
-
-## Dependencies
-
-- Issue 3 should be completed before Issue 4
-- Issue 2 should be completed before Issue 5
-- Issue 1 should be completed before Issue 4
-- All issues should be completed before Issue 6 is finalized
 
 ## Labels to Create
 
