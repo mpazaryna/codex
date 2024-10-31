@@ -44,161 +44,134 @@ interface FetchResult {
   error?: string;
 }
 
-function sanitizeFilename(title: string): string {
-  return title
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/-+/g, "-")
-    .replace(/^-|-$/g, "");
-}
+class MarkdownConverter {
+  private normalizeWhitespace(text: string): string {
+    return text
+      .split("\n")
+      .map((line) => line.trim())
+      .join("\n")
+      .replace(/[ \t]+/g, " ")
+      .trim();
+  }
 
-function normalizeWhitespace(text: string): string {
-  return (
-    text
+  private cleanupMarkdown(content: string): string {
+    let cleaned = content;
+    const patterns = [
+      /Source\s*:\s*[^\n]+/g,
+      /Share\s+More/g,
+      /Listen\s+Share/g,
+      /\[[\s\S]*?\]\(https?:\/\/[^\)]+source=post_page[^\)]*\)/g,
+      /\[\s*\]\([^\)]+\)/g,
+      /\[@[^\]]+\]/g,
+      /Published in[\s\S]*?·/g,
+      /Open in app/g,
+      /Member-only story/g,
+      /\d+ min read/g,
+    ];
+
+    patterns.forEach((pattern) => {
+      cleaned = cleaned.replace(pattern, "");
+    });
+
+    // Handle emoji titles with proper spacing
+    cleaned = cleaned.replace(/([^\s])([🚀🤖🧠💻📱📰🌱🖍️📔🖌])/g, "$1 $2");
+    cleaned = cleaned.replace(/([🚀🤖🧠💻📱📰🌱🖍️📔🖌])([^\s])/g, "$1 $2");
+
+    // Normalize whitespace
+    cleaned = cleaned
+      // Replace multiple spaces with a single space
+      .replace(/ +/g, " ")
+      // Normalize newlines
+      .replace(/\n{3,}/g, "\n\n")
       // Remove leading/trailing whitespace from each line
       .split("\n")
       .map((line) => line.trim())
       .join("\n")
-      // Normalize multiple consecutive whitespace characters
-      .replace(/[ \t]+/g, " ")
       // Remove leading/trailing whitespace from the entire text
-      .trim()
-  );
-}
+      .trim();
 
-function convertHtmlToMarkdown(html: string): string {
-  // First, normalize the HTML whitespace
-  let markdown = html.replace(/>\s+</g, "><");
+    return cleaned;
+  }
 
-  // Remove unnecessary divs and spans that might add extra spacing
-  markdown = markdown
-    .replace(/<div[^>]*>/gi, "")
-    .replace(/<\/div>/gi, "\n")
-    .replace(/<span[^>]*>/gi, "")
-    .replace(/<\/span>/gi, "");
+  public convert(html: string): string {
+    // Move the entire convertHtmlToMarkdown logic here
+    let markdown = html.replace(/>\s+</g, "><");
 
-  // Handle headings
-  markdown = markdown.replace(
-    /<h([1-6])[^>]*>(.*?)<\/h\1>/gi,
-    (_, level, content) => {
-      return `\n\n${"#".repeat(parseInt(level))} ${normalizeWhitespace(
-        content
-      )}\n\n`;
-    }
-  );
+    // Remove unnecessary divs and spans that might add extra spacing
+    markdown = markdown
+      .replace(/<div[^>]*>/gi, "")
+      .replace(/<\/div>/gi, "\n")
+      .replace(/<span[^>]*>/gi, "")
+      .replace(/<\/span>/gi, "");
 
-  // Handle paragraphs
-  markdown = markdown.replace(/<p[^>]*>(.*?)<\/p>/gi, (_, content) => {
-    return `\n\n${normalizeWhitespace(content)}\n\n`;
-  });
-
-  // Handle lists
-  markdown = markdown
-    .replace(/<ul[^>]*>(.*?)<\/ul>/gis, (_, content) => `\n${content}\n`)
-    .replace(/<ol[^>]*>(.*?)<\/ol>/gis, (_, content) => `\n${content}\n`)
-    .replace(
-      /<li[^>]*>(.*?)<\/li>/gi,
-      (_, content) => `- ${normalizeWhitespace(content)}\n`
+    // Handle headings
+    markdown = markdown.replace(
+      /<h([1-6])[^>]*>(.*?)<\/h\1>/gi,
+      (_, level, content) => {
+        return `\n\n${"#".repeat(parseInt(level))} ${this.normalizeWhitespace(
+          content
+        )}\n\n`;
+      }
     );
 
-  // Handle formatting
-  markdown = markdown
-    .replace(
-      /<(b|strong)[^>]*>(.*?)<\/\1>/gi,
-      (_, __, content) => `**${content}**`
-    )
-    .replace(/<(i|em)[^>]*>(.*?)<\/\1>/gi, (_, __, content) => `*${content}*`);
+    // Handle paragraphs
+    markdown = markdown.replace(/<p[^>]*>(.*?)<\/p>/gi, (_, content) => {
+      return `\n\n${this.normalizeWhitespace(content)}\n\n`;
+    });
 
-  // Handle links
-  markdown = markdown.replace(
-    /<a[^>]*href="([^"]*)"[^>]*>(.*?)<\/a>/gi,
-    (_, url, text) => `[${normalizeWhitespace(text)}](${url})`
-  );
+    // Handle lists
+    markdown = markdown
+      .replace(/<ul[^>]*>(.*?)<\/ul>/gis, (_, content) => `\n${content}\n`)
+      .replace(/<ol[^>]*>(.*?)<\/ol>/gis, (_, content) => `\n${content}\n`)
+      .replace(
+        /<li[^>]*>(.*?)<\/li>/gi,
+        (_, content) => `- ${this.normalizeWhitespace(content)}\n`
+      );
 
-  // Handle images
-  markdown = markdown.replace(
-    /<img[^>]*src="([^"]*)"[^>]*alt="([^"]*)"[^>]*>/gi,
-    (_, src, alt) => `\n\n![${alt}](${src})\n\n`
-  );
+    // Handle formatting
+    markdown = markdown
+      .replace(
+        /<(b|strong)[^>]*>(.*?)<\/\1>/gi,
+        (_, __, content) => `**${content}**`
+      )
+      .replace(
+        /<(i|em)[^>]*>(.*?)<\/\1>/gi,
+        (_, __, content) => `*${content}*`
+      );
 
-  // Handle line breaks
-  markdown = markdown.replace(/<br\s*\/?>/gi, "\n");
+    // Handle links
+    markdown = markdown.replace(
+      /<a[^>]*href="([^"]*)"[^>]*>(.*?)<\/a>/gi,
+      (_, url, text) => `[${this.normalizeWhitespace(text)}](${url})`
+    );
 
-  // Remove remaining HTML tags
-  markdown = markdown.replace(/<[^>]+>/g, " ");
+    // Handle images
+    markdown = markdown.replace(
+      /<img[^>]*src="([^"]*)"[^>]*alt="([^"]*)"[^>]*>/gi,
+      (_, src, alt) => `\n\n![${alt}](${src})\n\n`
+    );
 
-  // Decode HTML entities
-  markdown = markdown
-    .replace(/&nbsp;/g, " ")
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'")
-    .replace(/&mdash;/g, "—")
-    .replace(/&ndash;/g, "–");
+    // Handle line breaks
+    markdown = markdown.replace(/<br\s*\/?>/gi, "\n");
 
-  // Apply Medium-specific cleanup
-  markdown = cleanupMarkdown(markdown);
+    // Remove remaining HTML tags
+    markdown = markdown.replace(/<[^>]+>/g, " ");
 
-  // Final whitespace normalization
-  return (
-    markdown
-      // Replace multiple consecutive blank lines with double newlines
-      .replace(/\n{3,}/g, "\n\n")
-      // Remove any leading/trailing whitespace
-      .trim()
-  );
-}
+    // Decode HTML entities
+    markdown = markdown
+      .replace(/&nbsp;/g, " ")
+      .replace(/&amp;/g, "&")
+      .replace(/&lt;/g, "<")
+      .replace(/&gt;/g, ">")
+      .replace(/&quot;/g, '"')
+      .replace(/&#39;/g, "'")
+      .replace(/&mdash;/g, "—")
+      .replace(/&ndash;/g, "–");
 
-function cleanupMarkdown(content: string): string {
-  let cleaned = content;
+    markdown = this.cleanupMarkdown(markdown);
 
-  // Remove Medium-specific elements
-  const patterns = [
-    // Remove source attribution
-    /Source\s*:\s*[^\n]+/g,
-    // Remove sharing elements
-    /Share\s+More/g,
-    /Listen\s+Share/g,
-    // Remove Medium's source links
-    /\[[\s\S]*?\]\(https?:\/\/[^\)]+source=post_page[^\)]*\)/g,
-    // Remove empty links
-    /\[\s*\]\([^\)]+\)/g,
-    // Remove Medium's user references
-    /\[@[^\]]+\]/g,
-    // Remove "Published in" sections
-    /Published in[\s\S]*?·/g,
-    // Remove app-related text
-    /Open in app/g,
-    /Member-only story/g,
-    // Remove timestamps
-    /\d+ min read/g,
-  ];
-
-  // Apply each cleanup pattern
-  patterns.forEach((pattern) => {
-    cleaned = cleaned.replace(pattern, "");
-  });
-
-  // Handle emoji titles with proper spacing
-  cleaned = cleaned.replace(/([^\s])([🚀🤖🧠💻📱📰🌱🖍️📔🖌])/g, "$1 $2");
-  cleaned = cleaned.replace(/([🚀🤖🧠💻📱📰🌱🖍️📔🖌])([^\s])/g, "$1 $2");
-
-  // Normalize whitespace
-  cleaned = cleaned
-    // Replace multiple spaces with a single space
-    .replace(/ +/g, " ")
-    // Normalize newlines
-    .replace(/\n{3,}/g, "\n\n")
-    // Remove leading/trailing whitespace from each line
-    .split("\n")
-    .map((line) => line.trim())
-    .join("\n")
-    // Remove leading/trailing whitespace from the entire text
-    .trim();
-
-  return cleaned;
+    return markdown.replace(/\n{3,}/g, "\n\n").trim();
+  }
 }
 
 async function ensureOutputDir(): Promise<void> {
@@ -208,6 +181,24 @@ async function ensureOutputDir(): Promise<void> {
     console.error("Error creating output directory:", error);
     throw error;
   }
+}
+
+function sanitizeFilename(filename: string): string {
+  return (
+    filename
+      .toLowerCase()
+      // Replace spaces with dashes
+      .replace(/\s+/g, "-")
+      // Remove special characters
+      .replace(/[^a-z0-9-]/g, "")
+      // Remove multiple consecutive dashes
+      .replace(/-+/g, "-")
+      // Remove leading/trailing dashes
+      .trim()
+      .replace(/^-+|-+$/g, "")
+      // Limit length
+      .slice(0, 200)
+  );
 }
 
 export async function fetchArticle(url: string): Promise<FetchResult> {
@@ -278,7 +269,8 @@ export async function fetchArticle(url: string): Promise<FetchResult> {
     }
 
     const articleContent = articleElement.innerHTML;
-    const markdown = convertHtmlToMarkdown(articleContent);
+    const markdownConverter = new MarkdownConverter();
+    const markdown = markdownConverter.convert(articleContent);
 
     const metadata: ArticleMetadata = {
       title,
