@@ -1,6 +1,6 @@
 # GitHub Issues
 
-## [Enhance Error Handling System](https://github.com/mpazaryna/codex/issues/1)
+## [Error Handling](https://github.com/mpazaryna/codex/issues/1)
 
 **Labels**: enhancement, priority-high
 **Title**: Implement Comprehensive Error Handling System
@@ -18,7 +18,7 @@ Improve the current error handling system to make it more robust and informative
 
 ---
 
-## [Implement Configuration Management](https://github.com/mpazaryna/codex/issues/2)
+## [Configuration Management](https://github.com/mpazaryna/codex/issues/2)
 
 **Labels**: enhancement, architecture
 **Title**: Create Robust Configuration Management System
@@ -36,7 +36,7 @@ Develop a flexible and maintainable configuration system.
 
 ---
 
-## [Implement Unit Testing Suite](https://github.com/mpazaryna/codex/issues/3)
+## [Testing Suite](https://github.com/mpazaryna/codex/issues/3)
 
 **Labels**: testing, priority-high
 **Title**: Set Up Unit Testing Infrastructure and Initial Tests
