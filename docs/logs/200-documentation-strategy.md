@@ -2,7 +2,7 @@
 
 ## Context
 
-While developing the article reader project, we needed a documentation strategy optimized for LLM-assisted development. After exploring various approaches, we settled on a flat structure with expanded Johnny Decimal-inspired numbering to allow for significant growth within categories.
+While developing the Codex project, we needed a documentation strategy optimized for LLM-assisted development. After exploring various approaches, we settled on a flat structure with expanded Johnny Decimal-inspired numbering to allow for significant growth within categories.
 
 ## Numbering System
 
@@ -51,12 +51,14 @@ Implement a flat file structure with expanded numbering:
 ## Rationale
 
 1. **Expanded Capacity**
+
    - 99 files per category instead of 9
    - Room for detailed documentation
    - Space for project evolution
    - Natural chronological ordering
 
 2. **Maintainable Simplicity**
+
    - Flat file structure
    - Clear numbering pattern
    - Easy file management
@@ -72,6 +74,7 @@ Implement a flat file structure with expanded numbering:
 
 1. File naming: `[number]-description.md`
    Examples:
+
    - `101-initial-architecture.md`
    - `201-llm-collaboration-patterns.md`
    - `301-article-fetching-design.md`

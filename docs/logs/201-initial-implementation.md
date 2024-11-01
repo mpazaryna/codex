@@ -1,19 +1,21 @@
-# 001 - Initial Generation: AI-Assisted Article Reader Implementation
+# Initial Generation: AI-Assisted Article Reader Implementation
 
 ## Overview
 
-This document captures the initial phase of the Article Reader project, where we used AI assistance to generate a complete, working solution in a single file. The implementation focuses on fetching and converting Medium articles to Markdown format while preserving metadata and maintaining clean output.
+This document captures the initial phase of the Codex project, where we used AI assistance to generate a complete, working solution in a single file. The implementation focuses on fetching and converting Medium articles to Markdown format while preserving metadata and maintaining clean output.
 
 ## Initial Implementation
 
 ### Core Features
 
 1. **Article Fetching**
+
    - Handles Medium articles with authentication
    - Supports custom user agent and headers
    - Includes error handling for network requests
 
 2. **Content Processing**
+
    - HTML to Markdown conversion
    - Metadata extraction (title, author, publish date)
    - Content cleanup and normalization
@@ -33,9 +35,9 @@ const config = {
   cookies: Deno.env.get("MEDIUM_COOKIE") ?? "",
   headers: {
     "User-Agent": "Mozilla/5.0...",
-    "Accept": "text/html,application/xhtml+xml...",
+    Accept: "text/html,application/xhtml+xml...",
     "Accept-Language": "en-US,en;q=0.5",
-  }
+  },
 };
 ```
 
@@ -62,11 +64,13 @@ interface FetchResult {
 ### Core Functions
 
 1. **Content Fetching**
+
    - `fetchArticle(url: string)`: Main function orchestrating the entire process
    - Handles HTTP requests with proper headers and cookies
    - Implements error handling and result reporting
 
 2. **Content Processing**
+
    - `convertHtmlToMarkdown(html: string)`: Converts HTML content to Markdown
    - `cleanupMarkdown(content: string)`: Removes Medium-specific elements
    - `normalizeWhitespace(text: string)`: Ensures consistent formatting
@@ -88,6 +92,7 @@ interface FetchResult {
 ### Single File Approach
 
 1. **Benefits**
+
    - Rapid development and iteration
    - Easy to understand flow
    - No initial complexity from file organization
