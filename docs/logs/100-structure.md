@@ -16,7 +16,6 @@ codex/
 │   └── project-summary.md
 ├── src/
 │   └── article_reader.ts
-├── tests/
 │   └── article_reader.test.ts
 └── README.md
 ```

@@ -1,8 +1,8 @@
-# Why Deno for Article Reader
+# Why Deno for Codex
 
 ## Context
 
-When starting the Article Reader project, we needed to choose between Node.js and Deno as our runtime environment. This document captures why Deno proved to be the better choice for this specific project.
+When starting the Codex project, we needed to choose between Node.js and Deno as our runtime environment. This document captures why Deno proved to be the better choice for this specific project.
 
 ## Key Advantages
 
