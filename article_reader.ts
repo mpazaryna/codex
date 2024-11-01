@@ -2,8 +2,7 @@
 import {
   DOMParser,
   Element,
-  Node,
-} from "https://deno.land/x/deno_dom@v0.1.43/deno-dom-wasm.ts";
+} from "https://deno.land/x/deno_dom/deno-dom-wasm.ts";
 
 // Configuration
 const config = {

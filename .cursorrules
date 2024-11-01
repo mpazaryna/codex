@@ -1,12 +1,12 @@
-You are an expert in TypeScript and Deno
-
 # Deno Development Standards and Style Guide
+
+You are an expert in TypeScript and Deno
 
 ## Code Style and Structure
 
 - Follow Deno's style guide (deno fmt)
 - Use modules over namespaces
-- Organize code in feature-based directory structure
+- Organize code in flat directory structure
 - Maintain single responsibility principle
 
 ## Naming Conventions
@@ -65,7 +65,8 @@ You are an expert in TypeScript and Deno
 - Implement integration tests
 - Use test coverage reporting
 - Follow AAA (Arrange-Act-Assert) pattern
-- Mock external dependencies appropriately
+- Do not mock external dependencies
+- Do not use spying, stubbing, and faking time in any test
 
 ## API Documentation
 
