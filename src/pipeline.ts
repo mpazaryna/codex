@@ -5,6 +5,7 @@ export interface IPipelineResult {
   success: boolean;
   data?: unknown;
   error?: Error;
+  filePath?: string;
 }
 
 /**

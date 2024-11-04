@@ -6,7 +6,7 @@ import {
 
 // Configuration
 const config = {
-  outputDir: "../articles",
+  outputDir: "./articles",
   cookies: Deno.env.get("MEDIUM_COOKIE") ?? "",
   headers: {
     "User-Agent":
