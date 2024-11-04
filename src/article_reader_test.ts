@@ -29,8 +29,7 @@ Deno.test({
   name: "Integration Test: fetchArticle should successfully fetch and save Medium article",
   fn: async () => {
     const testUrl =
-      "https://medium.com/macoclock/10-mac-apps-under-20-that-are-" +
-      "totally-worth-it-0da24b9e665c";
+      "https://medium.com/bricksnbrackets/from-mini-to-mighty-the-mac-has-finally-caught-up-with-the-ipad-eb81f39ba0c4";
 
     try {
       const result = await fetchArticle(testUrl);
