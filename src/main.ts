@@ -1,7 +1,5 @@
-import { fetchArticle } from "./article_reader.ts";
 import { IPipelineResult } from "./pipeline.ts";
 import { SequentialPipeline } from "./pipeline_sequential.ts";
-import { writeFileStr } from "https://deno.land/std/fs/mod.ts";
 
 interface CliOptions {
   url: string;
@@ -31,3 +29,6 @@ async function main() {
 if (import.meta.main) {
   main();
 }
+
+// run with:
+// deno run --allow-net --allow-read --allow-write src/main.ts
