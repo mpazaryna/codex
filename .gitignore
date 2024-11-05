@@ -26,3 +26,4 @@ Thumbs.db
 /coverage
 /articles
 /build
+scripts/set_cookie.sh
