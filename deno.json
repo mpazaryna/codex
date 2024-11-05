@@ -1,11 +1,12 @@
 {
-    "tasks": {
-      "test": "deno test --allow-net --allow-read --allow-write --allow-env"
-    },
-    "permissions": {
-      "net": true,
-      "read": true,
-      "write": true,
-      "env": true
-    }
+  "tasks": {
+    "test": "deno test --allow-net --allow-read --allow-write --allow-env",
+    "docs": "deno doc --html --output=build/docs --name=codex src/"
+  },
+  "permissions": {
+    "net": true,
+    "read": true,
+    "write": true,
+    "env": true
   }
+}
