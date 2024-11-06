@@ -24,12 +24,13 @@ if (import.meta.main) {
   console.log("Starting article fetch...");
   const result = await articleService.fetchArticle(url);
 
-  if (result.success) {
+  if (result.ok) {
     console.log("\nArticle saved successfully!");
-    console.log("File:", result.filePath);
-    console.log("Metadata:", result.metadata);
+    console.log("File:", result.value.filePath);
+    console.log("Metadata:", result.value.metadata);
   } else {
-    console.error("\nFailed to fetch article:", result.error);
+    console.error("\nFailed to fetch article:", result.error.message);
+    console.error("Error type:", result.error.type);
     Deno.exit(1);
   }
 }

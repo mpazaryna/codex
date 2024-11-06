@@ -1,4 +1,6 @@
 // types.ts
+import { ArticleError } from "./errors.ts";
+
 export type ArticleMetadata = {
   title: string;
   author: string;
@@ -7,13 +9,15 @@ export type ArticleMetadata = {
   dateSaved: string;
 };
 
-export type FetchResult = {
-  success: boolean;
-  fileName?: string;
-  metadata?: ArticleMetadata;
-  filePath?: string;
-  error?: string;
-};
+export type Result<T> =
+  | { ok: true; value: T }
+  | { ok: false; error: ArticleError };
+
+export type FetchResult = Result<{
+  fileName: string;
+  metadata: ArticleMetadata;
+  filePath: string;
+}>;
 
 export type ReaderConfig = {
   outputDir: string;

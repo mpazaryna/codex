@@ -11,6 +11,7 @@ import {
 } from "./types.ts";
 import { saveArticle } from "./storage.ts";
 import { htmlToMarkdown } from "./markdown.ts";
+import { createArticleError, ErrorTypes } from "./errors.ts";
 
 /**
  * Creates a Medium article reader.
@@ -48,7 +49,13 @@ export const createMediumReader = (): ArticleReader => ({
 
       const response = await fetchWithHeaders(url, config.cookies);
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        return {
+          ok: false,
+          error: createArticleError(
+            ErrorTypes.NETWORK,
+            `HTTP error! status: ${response.status}`
+          ),
+        };
       }
 
       const html = await response.text();
@@ -71,16 +78,18 @@ export const createMediumReader = (): ArticleReader => ({
       console.log("Saved article to:", filePath);
 
       return {
-        success: true,
-        fileName,
-        metadata,
-        filePath,
+        ok: true,
+        value: {
+          fileName,
+          metadata,
+          filePath,
+        },
       };
     } catch (error) {
       console.error("Error fetching article:", error.message);
       return {
-        success: false,
-        error: error.message,
+        ok: false,
+        error: createArticleError(ErrorTypes.CONTENT_EXTRACTION, error.message),
       };
     }
   },
